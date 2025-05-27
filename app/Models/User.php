@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -44,5 +45,27 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function isManager()
+    {
+        return $this->role === 'manager';
+    }
+
+    public function isEmployee()
+    {
+        return $this->role === 'employee';
+    }
+
+    // Leave requests submitted by this user (if employee)
+    public function leaveRequests()
+    {
+        return $this->hasMany(LeaveRequest::class, 'user_id');
+    }
+
+    // Leave requests this user has reviewed (if manager)
+    public function reviewedLeaveRequests()
+    {
+        return $this->hasMany(LeaveRequest::class, 'manager_id');
     }
 }
