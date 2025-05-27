@@ -45,20 +45,31 @@ class LeaveRequestController extends Controller
 
         LeaveRequest::create($formFields);
 
-        return redirect('/')->with('message', 'Leave Request Created successfully');
+        return redirect('/leave-requests')->with('message', 'Leave Request Created successfully');
     }
 
     public function update(Request $request, LeaveRequest $leaveRequest)
     {
+        $user = auth()->user();
+        if($user->role !== 'manager'){
+            abort(403, 'Unauthorized Service');
+        }
 
         $formFields = $request->validate([
             'status' => 'required'
         ]);
 
-        $formFields['manager_id'] = auth()->user()->id;
+        $formFields['manager_id'] = $user->id;
 
         $leaveRequest->update($formFields);
 
         return redirect('/leave-requests')->with('message', 'Leave Request Updated successfully');
+    }
+
+    public function destroy(LeaveRequest $leaveRequest)
+    {
+        $leaveRequest->delete();
+
+        return redirect('/leave-requests')->with('message', 'Leave Request deleted successfully');
     }
 }

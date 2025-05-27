@@ -9,8 +9,9 @@
                 {{ session('message') }}
             </div>
         @endif
-
-        <a href="{{ route('leave-request.create') }}" class="btn btn-primary mb-3">Create New Leave Request</a>
+        @if(auth()->user()->role === 'employee')
+            <a href="{{ route('leave-request.create') }}" class="btn btn-primary mb-3">Create New Leave Request</a>
+        @endif
 
         @if($leaveRequests->isEmpty())
             <p>No leave requests found.</p>
@@ -40,6 +41,9 @@
                             <td>{{ $request->manager->name ?? 'Unassigned' }}</td>
                             <td>
                                 <a href="{{ route('leave-request.show', $request->id) }}" class="btn btn-sm btn-info">View</a>
+                                @if(auth()->user()->role === 'employee' && $request->status === 'pending')
+                                    <a href="{{ route('leave-request.destroy', $request->id) }}" class="btn btn-sm btn-danger">Delete</a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
