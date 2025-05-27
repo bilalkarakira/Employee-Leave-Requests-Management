@@ -10,6 +10,7 @@ class LeaveRequestController extends Controller
     public function index()
     {
         $user = auth()->user();
+        // dd($user->role);
         if ($user->role === 'employee') {
             // Return only their own leave requests
             $leaveRequests = LeaveRequest::where('user_id', $user->id)->get();
@@ -40,7 +41,7 @@ class LeaveRequestController extends Controller
             'reason' => 'required',
         ]);
 
-        $formFields['user_id'] = 1;
+        $formFields['user_id'] = auth()->user()->id;
 
         LeaveRequest::create($formFields);
 
