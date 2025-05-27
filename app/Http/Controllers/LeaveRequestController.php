@@ -9,7 +9,15 @@ class LeaveRequestController extends Controller
 {
     public function index()
     {
-        return view('leave-request.index');
+        $user = auth()->user();
+        if ($user->role === 'employee') {
+            // Return only their own leave requests
+            $leaveRequests = LeaveRequest::where('user_id', $user->id)->get();
+        } else {
+            // If manager, return all leave requests
+            $leaveRequests = LeaveRequest::all();
+        }
+        return view('leave-request.index', ['leaveRequests' => $leaveRequests]);
     }
 
     public function show(LeaveRequest $leaveRequest)
@@ -32,7 +40,7 @@ class LeaveRequestController extends Controller
             'reason' => 'required',
         ]);
 
-        // $formFields['user_id'] = auth()->id();
+        $formFields['user_id'] = 1;
 
         LeaveRequest::create($formFields);
 
