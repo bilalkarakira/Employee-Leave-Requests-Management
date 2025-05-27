@@ -58,6 +58,30 @@
                         </div>
 
                         <div class="mb-6">
+                            <label for="department" class="inline-block text-lg mb-2"
+                                >Department</label
+                            >
+                            <select
+                                type="text"
+                                class="border border-gray-200 rounded p-2 w-full"
+                                name="department"
+                                                                    value = "{{old('department')}}"
+
+                            >
+                            <option value="Human Resources">Human Resources</option>
+                            <option value="IT">IT</option>
+                            <option value="Sales">Sales</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Finance">Finance</option>
+                            <option value="Operations">Operations</option>
+                            <option value="Customer Service">Customer Service</option>
+                            <option value="Research and Development">Research and Development</option>
+                            <option value="Legal">Legal</option>
+                            <option value="Administration">Administration</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-6">
                             <label
                                 for="password"
                                 class="inline-block text-lg mb-2"

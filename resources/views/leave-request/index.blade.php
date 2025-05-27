@@ -19,6 +19,7 @@
                 <thead>
                     <tr>
                         <th>Employee</th>
+                        <th>Department</th>
                         <th>Start Date</th>
                         <th>End Date</th>
                         <th>Reason</th>
@@ -31,6 +32,7 @@
                     @foreach($leaveRequests as $request)
                         <tr>
                             <td>{{ $request->employee->name ?? 'N/A' }}</td>
+                            <td>{{ $request->employee->department ?? 'N/A' }}</td>
                             <td>{{ $request->start_date }}</td>
                             <td>{{ $request->end_date }}</td>
                             <td>{{ $request->reason }}</td>

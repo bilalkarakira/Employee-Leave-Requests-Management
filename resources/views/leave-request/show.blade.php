@@ -12,6 +12,7 @@
 
     <div class="card p-4 mb-4">
         <p><strong>Employee:</strong> {{ $leaveRequest->employee->name ?? 'N/A' }}</p>
+        <p><strong>Department:</strong> {{ $leaveRequest->employee->department ?? 'N/A' }}</p>
         <p><strong>Start Date:</strong> {{ $leaveRequest->start_date }}</p>
         <p><strong>End Date:</strong> {{ $leaveRequest->end_date }}</p>
         <p><strong>Reason:</strong> {{ $leaveRequest->reason }}</p>
