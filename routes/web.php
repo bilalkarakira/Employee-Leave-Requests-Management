@@ -11,6 +11,7 @@ use App\Http\Controllers\LeaveRequestController;
 // Leave Request Routes
 
 Route::get('/', function () {
+    // dd(auth()->user()->role);
     return view('welcome');
 })->name('home');
 
@@ -18,7 +19,7 @@ Route::get('/leave-request/create', [LeaveRequestController::class, 'create'])->
 Route::post('/leave-request/create', [LeaveRequestController::class, 'store'])->middleware('auth')->name('leave-request.store');
 Route::get('/leave-requests', [LeaveRequestController::class, 'index'])->middleware('auth')->name('leave-request.index');
 Route::get('/leave-request/{leaveRequest}', [LeaveRequestController::class, 'show'])->middleware('auth')->name('leave-request.show');
-
+Route::put('/leave-request/{leaveRequest}', [LeaveRequestController::class, 'update'])->middleware('auth')->name('leave-request.update');
 // Auth Routes
 
 // Show Register/Create Form

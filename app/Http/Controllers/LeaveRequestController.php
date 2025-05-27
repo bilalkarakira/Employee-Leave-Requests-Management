@@ -47,4 +47,18 @@ class LeaveRequestController extends Controller
 
         return redirect('/')->with('message', 'Leave Request Created successfully');
     }
+
+    public function update(Request $request, LeaveRequest $leaveRequest)
+    {
+
+        $formFields = $request->validate([
+            'status' => 'required'
+        ]);
+
+        $formFields['manager_id'] = auth()->user()->id;
+
+        $leaveRequest->update($formFields);
+
+        return redirect('/leave-requests')->with('message', 'Leave Request Updated successfully');
+    }
 }

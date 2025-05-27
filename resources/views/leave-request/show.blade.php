@@ -18,36 +18,24 @@
         <p><strong>Reason:</strong> {{ $leaveRequest->reason }}</p>
         <p><strong>Status:</strong> {{ ucfirst($leaveRequest->status) }}</p>
         <p><strong>Manager:</strong> {{ $leaveRequest->manager->name ?? 'Unassigned' }}</p>
-    </div>
-
-    @if(auth()->user()->role === 'Manager')
-        <form method="POST" action="{{ route('leave-request.update', $leaveRequest->id) }}">
+        @if(auth()->user()->role === 'manager' && $leaveRequest->status === 'pending')
+    <div>
+        <form action="{{ route('leave-request.update', $leaveRequest->id) }}" method="POST" class="d-inline">
             @csrf
             @method('PUT')
-
-            <div class="form-group mb-3">
-                <label for="status"><strong>Update Status</strong></label>
-                <select name="status" id="status" class="form-control">
-                    <option value="pending" {{ $leaveRequest->status === 'pending' ? 'selected' : '' }}>Pending</option>
-                    <option value="approved" {{ $leaveRequest->status === 'approved' ? 'selected' : '' }}>Approved</option>
-                    <option value="declined" {{ $leaveRequest->status === 'declined' ? 'selected' : '' }}>Declined</option>
-                </select>
-            </div>
-
-            <div class="form-group mb-3">
-                <label for="manager_id"><strong>Assign Manager</strong></label>
-                <select name="manager_id" id="manager_id" class="form-control">
-                    <option value="">-- Select Manager --</option>
-                    @foreach($managers as $manager)
-                        <option value="{{ $manager->id }}" {{ $leaveRequest->manager_id == $manager->id ? 'selected' : '' }}>
-                            {{ $manager->name }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-
-            <button type="submit" class="btn btn-success">Update Request</button>
+            <input type="hidden" name="status" value="approved">
+            <button type="submit" class="btn btn-success">Accept</button>
         </form>
-    @endif
+
+        <form action="{{ route('leave-request.update', $leaveRequest->id) }}" method="POST" class="d-inline ml-2">
+            @csrf
+            @method('PUT')
+            <input type="hidden" name="status" value="rejected">
+            <button type="submit" class="btn btn-danger">Decline</button>
+        </form>
+    </div>
+@endif
+    </div>
+
 </div>
 @endsection
