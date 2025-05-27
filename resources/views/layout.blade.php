@@ -6,7 +6,6 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light px-3">
-        <a class="navbar-brand" href="{{ route('home') }}">LeaveApp</a>
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav ms-auto">
                 @auth
