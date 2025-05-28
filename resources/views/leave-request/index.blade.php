@@ -42,7 +42,11 @@
                             <td>
                                 <a href="{{ route('leave-request.show', $request->id) }}" class="btn btn-sm btn-info">View</a>
                                 @if(auth()->user()->role === 'employee' && $request->status === 'pending')
-                                    <a href="{{ route('leave-request.destroy', $request->id) }}" class="btn btn-sm btn-danger">Delete</a>
+                                    <form action="{{ route('leave-request.destroy', $request->id) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this leave request?');">Delete</button>
+                                    </form>
                                 @endif
                             </td>
                         </tr>

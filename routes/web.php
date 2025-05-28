@@ -20,6 +20,7 @@ Route::post('/leave-request/create', [LeaveRequestController::class, 'store'])->
 Route::get('/leave-requests', [LeaveRequestController::class, 'index'])->middleware('auth')->name('leave-request.index');
 Route::get('/leave-request/{leaveRequest}', [LeaveRequestController::class, 'show'])->middleware('auth')->name('leave-request.show');
 Route::put('/leave-request/{leaveRequest}', [LeaveRequestController::class, 'update'])->middleware('auth')->name('leave-request.update');
+//TODO: fix delete route
 Route::delete('/leave-request/{leaveRequest}', [LeaveRequestController::class, 'destroy'])->middleware('auth')->name('leave-request.destroy');
 
 // Auth Routes
