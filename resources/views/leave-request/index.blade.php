@@ -4,11 +4,6 @@
     <div class="container mt-4">
         <h1 class="mb-4">Leave Requests</h1>
 
-        @if(session('message'))
-            <div class="alert alert-success">
-                {{ session('message') }}
-            </div>
-        @endif
         @if(auth()->user()->role === 'employee')
             <a href="{{ route('leave-request.create') }}" class="btn btn-primary mb-3">Create New Leave Request</a>
         @endif

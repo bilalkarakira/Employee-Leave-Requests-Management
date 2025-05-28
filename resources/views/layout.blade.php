@@ -2,7 +2,6 @@
 <html>
 <head>
     <title>Leave Requests Platform</title>
-    <script src="//unpkg.com/alpinejs" defer></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -28,9 +27,6 @@
     </nav>
 
     <div class="container py-4">
-        @if(session('message'))
-            <div class="alert alert-success">{{ session('message') }}</div>
-        @endif
 
         @yield('content')
     </div>

@@ -4,12 +4,6 @@
 <div class="container mt-4">
     <h1 class="mb-4">Leave Request Details</h1>
 
-    @if(session('message'))
-        <div class="alert alert-success">
-            {{ session('message') }}
-        </div>
-    @endif
-
     <div class="card p-4 mb-4">
         <p><strong>Employee:</strong> {{ $leaveRequest->employee->name ?? 'N/A' }}</p>
         <p><strong>Department:</strong> {{ $leaveRequest->employee->department ?? 'N/A' }}</p>
