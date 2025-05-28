@@ -114,14 +114,7 @@ php artisan key:generate
 php artisan migrate
 ```
 
-### 6. Build Frontend Assets (Tailwind)
-
-```bash
-npm run dev   # for development
-npm run build # for production
-```
-
-### 7. Run the Development Server
+### 6. Run the Development Server
 
 ```bash
 php artisan serve
