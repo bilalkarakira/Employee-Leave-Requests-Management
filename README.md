@@ -28,14 +28,28 @@ This Laravel-based Leave Management application allows employees to request time
 
 ## ✅ Prerequisites
 
-Before running this project, ensure you have the following installed on your machine:
+Make sure the following tools are installed before running this project:
 
-- PHP >= 8.1
-- Composer
-- Node.js and NPM
-- PostgreSQL (or your preferred database)
-- Git
-- Laravel CLI (`composer global require laravel/installer`)
+- **PHP >= 8.1**  
+  [Install PHP](https://www.php.net/manual/en/install.php) (or use [Laravel Herd](https://herd.laravel.com) for Mac users)
+
+- **Composer** – PHP Dependency Manager  
+  [Install Composer](https://getcomposer.org/download/)
+
+- **Node.js & NPM** – JavaScript runtime and package manager  
+  [Install Node.js](https://nodejs.org/en/download/)
+
+- **PostgreSQL** – Database  
+  [Install PostgreSQL](https://www.postgresql.org/download/)  
+  [Install pgAdmin](https://www.pgadmin.org/download/)
+
+- **Git** – Version Control  
+  [Install Git](https://git-scm.com/downloads)
+
+- **Laravel Installer (Optional)**  
+  ```bash
+  composer global require laravel/installer
+  ```
 
 ---
 
@@ -46,6 +60,7 @@ Before running this project, ensure you have the following installed on your mac
 ```bash
 git clone https://github.com/bilalkarakira/Employee-Leave-Requests-Management.git
 cd Employee-Leave-Requests-Management
+```
 
 ### 2. Install Dependencies
 
@@ -54,7 +69,35 @@ composer install
 npm install
 ```
 
-### 3. Environment Configuration
+### 3. Database Setup (pgAdmin + PostgreSQL)
+
+This application uses **PostgreSQL** as the database. Below are the steps to configure it locally using **pgAdmin**.
+
+#### 1. Install PostgreSQL & pgAdmin
+
+- Download and install PostgreSQL: [https://www.postgresql.org/download/](https://www.postgresql.org/download/)
+- Install pgAdmin (GUI tool): [https://www.pgadmin.org/download/](https://www.pgadmin.org/download/)
+
+#### 2. Open pgAdmin & Create a New Database
+
+1. Launch **pgAdmin** and connect to your PostgreSQL server (you might need to enter the password you set during PostgreSQL installation).
+2. In the left sidebar, right-click on **Databases** → **Create** → **Database**.
+3. Enter a name for your database (e.g., `leave_management`) and click **Save**.
+
+#### 3. Update `.env` File in Laravel Project
+
+Once the database is created, open your Laravel project’s `.env` file and update the following lines with your PostgreSQL details:
+
+```env
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=leave_management
+DB_USERNAME=your_postgres_username
+DB_PASSWORD=your_postgres_password
+```
+
+### 4. Environment Configuration
 
 ```bash
 cp .env.example .env
@@ -63,20 +106,20 @@ php artisan key:generate
 
 Update `.env` with your database and mail configuration. You can use the `.env.example` file as a reference, for local development I am using pgAdmin and pgSQL for local testing.
 
-### 4. Run Migrations
+### 5. Run Migrations
 
 ```bash
 php artisan migrate
 ```
 
-### 5. Build Frontend Assets (Tailwind)
+### 6. Build Frontend Assets (Tailwind)
 
 ```bash
 npm run dev   # for development
 npm run build # for production
 ```
 
-### 6. Run the Development Server
+### 7. Run the Development Server
 
 ```bash
 php artisan serve
