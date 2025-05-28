@@ -46,7 +46,7 @@ Make sure the following tools are installed before running this project:
 - **Git** – Version Control  
   [Install Git](https://git-scm.com/downloads)
 
-- **Laravel Installer (Optional)**  
+- **Laravel Installer**  
   ```bash
   composer global require laravel/installer
   ```
@@ -107,8 +107,6 @@ DB_PASSWORD=your_postgres_password
 cp .env.example .env
 php artisan key:generate
 ```
-
-Update `.env` with your database and mail configuration. You can use the `.env.example` file as a reference, for local development I am using pgAdmin and pgSQL for local testing.
 
 ### 5. Run Migrations
 
