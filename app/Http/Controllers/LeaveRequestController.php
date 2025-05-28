@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\LeaveRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class LeaveRequestController extends Controller
 {
@@ -34,19 +35,34 @@ class LeaveRequestController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $formFields = $request->validate([
-            'start_date' => 'required',
-            'end_date' => 'required',
-            'reason' => 'required',
-        ]);
+{
+    $validator = Validator::make($request->all(), [
+        'start_date' => 'required|date',
+        'end_date' => 'required|date',
+        'reason' => 'required|string',
+    ]);
 
-        $formFields['user_id'] = auth()->user()->id;
+    $validator->after(function ($validator) use ($request) {
+        if ($request->end_date < $request->start_date) {
+            $validator->errors()->add('end_date', 'End date cannot be before start date.');
+        }
+    });
 
-        LeaveRequest::create($formFields);
-
-        return redirect('/leave-requests')->with('message', 'Leave Request Created successfully');
+    if ($validator->fails()) {
+        return back()
+            ->withErrors($validator)
+            ->withInput();
     }
+
+    LeaveRequest::create([
+        'start_date' => $request->start_date,
+        'end_date' => $request->end_date,
+        'reason' => $request->reason,
+        'user_id' => auth()->id(),
+    ]);
+
+    return redirect('/leave-requests')->with('message', 'Leave Request created successfully.');
+}
 
     public function update(Request $request, LeaveRequest $leaveRequest)
     {
