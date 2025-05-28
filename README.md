@@ -71,22 +71,26 @@ npm install
 
 ### 3. Database Setup (pgAdmin + PostgreSQL)
 
-This application uses **PostgreSQL** as the database. Below are the steps to configure it locally using **pgAdmin**.
+This application uses **PostgreSQL** as the database. Follow the steps below to configure it locally using **pgAdmin**:
 
-#### 1. Install PostgreSQL & pgAdmin
+#### ➤ Install PostgreSQL & pgAdmin
 
-- Download and install PostgreSQL: [https://www.postgresql.org/download/](https://www.postgresql.org/download/)
-- Install pgAdmin (GUI tool): [https://www.pgadmin.org/download/](https://www.pgadmin.org/download/)
+- 📦 [Download and install PostgreSQL](https://www.postgresql.org/download/)
+- 🧰 [Download and install pgAdmin](https://www.pgadmin.org/download/)
 
-#### 2. Open pgAdmin & Create a New Database
+#### ➤ Create a New Database in pgAdmin
 
-1. Launch **pgAdmin** and connect to your PostgreSQL server (you might need to enter the password you set during PostgreSQL installation).
-2. In the left sidebar, right-click on **Databases** → **Create** → **Database**.
-3. Enter a name for your database (e.g., `leave_management`) and click **Save**.
+- Open **pgAdmin** and connect to your PostgreSQL server (you may be asked to enter the password you set during installation).
+- In the left sidebar:
+  - Right-click on **Databases** → click **Create** → **Database**.
+  - Enter a database name (e.g., `leave_management`) and click **Save**.
 
-#### 3. Update `.env` File in Laravel Project
+#### ➤ Configure `.env` File
 
-Once the database is created, open your Laravel project’s `.env` file and update the following lines with your PostgreSQL details:
+After creating the database:
+
+- Open the project’s `.env` file
+- Update the database settings like below:
 
 ```env
 DB_CONNECTION=pgsql
